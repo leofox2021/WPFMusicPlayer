@@ -4,10 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="700" Width="300">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-            Soon there's gonna be an awesome music player with modern UI!
-        </TextBlock>
+        <StackPanel Orientation="Vertical">
+            <ListView Height="300" Width="280" Margin="0, 15, 0, 0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Song"></GridViewColumn>
+                        <GridViewColumn Header="Album"></GridViewColumn>
+                        <GridViewColumn Header="Artist"></GridViewColumn>
+                        <GridViewColumn Header="TrackNumber"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>
