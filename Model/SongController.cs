@@ -22,7 +22,8 @@ namespace WPFMusicPlayer.Model
                     Name = musicFile.Tag.Title,
                     Album = musicFile.Tag.Album,
                     Artist = musicFile.Tag.FirstAlbumArtist,
-                    TrackNumber = musicFile.Tag.Track
+                    TrackNumber = musicFile.Tag.Track,
+                    FullPath = openFileDialog.FileName
                 });
             }
         }

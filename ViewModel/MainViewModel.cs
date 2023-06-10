@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -16,10 +15,15 @@ namespace WPFMusicPlayer.ViewModel
         public MainViewModel()
         {
             Songs = SongController.Songs;
-            
-            PlaySongCommand = new RelayCommand(PlaySong, CanPlaySong);
+
             AddSongCommand = new RelayCommand(AddSong, CanAddSong);
+            PlaySongCommand = new RelayCommand(PlaySong, CanPlaySong);
+            PauseSongCommand = new RelayCommand(PauseSong, CanPauseSong);
+            StopSongCommand = new RelayCommand(StopSong, CanStopSong);
+            NextSongCommand = new RelayCommand(GoNextSong, CanGoNextSong);
+            PreviousSongCommand = new RelayCommand(GoPreviousSong, CanGoPreviousSong);
         }
+
 
         public int SelectedSongIndex
         {
@@ -51,8 +55,32 @@ namespace WPFMusicPlayer.ViewModel
 
         private void AddSong(object obj) => SongController.AddSong();
 
-        private void PlaySong(object obj) => MusicPlayer.Play();
+        private void PlaySong(object obj) => MusicPlayer.Play(Songs[_selectedSongIndex]);
 
         private bool CanPlaySong(object obj) => true;
+        
+        private void StopSong(object obj) => MusicPlayer.Stop();
+
+        private bool CanStopSong(object obj) => true;
+        
+        private bool CanGoPreviousSong(object obj) => true;
+        
+        private void GoPreviousSong(object obj)
+        {
+            SelectedSongIndex -= 1;
+            MusicPlayer.Play(Songs[_selectedSongIndex]);
+        }
+
+        private bool CanGoNextSong(object obj) => true;
+
+        private void GoNextSong(object obj)
+        {
+            SelectedSongIndex += 1;
+            MusicPlayer.Play(Songs[_selectedSongIndex]);
+        }
+
+        private bool CanPauseSong(object obj) => true;
+
+        private void PauseSong(object obj) => MusicPlayer.Pause();
     }
 }
