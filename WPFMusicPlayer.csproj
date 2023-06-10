@@ -57,7 +57,7 @@
         <Compile Include="Command\RelayCommand.cs" />
         <Compile Include="Model\MusicPlayer.cs" />
         <Compile Include="Model\Song.cs" />
-        <Compile Include="Model\SongManager.cs" />
+        <Compile Include="Model\SongController.cs" />
         <Compile Include="ViewModel\MainViewModel.cs" />
         <Compile Include="View\MainWindow.xaml.cs">
           <DependentUpon>MainWindow.xaml</DependentUpon>

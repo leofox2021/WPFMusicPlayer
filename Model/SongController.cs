@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Security.AccessControl;
+﻿using System.Collections.ObjectModel;
 
 namespace WPFMusicPlayer.Model
 {
-    public static class SongManager
+    public static class SongController
     {
         private static ObservableCollection<Song> _songs = new ObservableCollection<Song>();
 

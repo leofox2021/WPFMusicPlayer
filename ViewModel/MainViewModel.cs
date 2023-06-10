@@ -9,7 +9,7 @@ namespace WPFMusicPlayer.ViewModel
     {
         public MainViewModel()
         {
-            Songs = SongManager.Songs;
+            Songs = SongController.Songs;
             PlaySongCommand = new RelayCommand(PlaySong, CanPlaySong);
         }
 
