@@ -1,4 +1,6 @@
-﻿namespace WPFMusicPlayer
+﻿using WPFMusicPlayer.ViewModel;
+
+namespace WPFMusicPlayer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,6 +10,7 @@
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

@@ -2,13 +2,12 @@
 {
     public class Song
     {
-        public Song(string name, string fullPath)
-        {
-            Name = name;
-            FullPath = fullPath;
-        }
+        public Song() {}
         
         public string Name { get; set; }
+        public string Album { get; set; }
+        public string Artist { get; set; }
+        public uint TrackNumber { get; set; }
         public string FullPath { get; set; }
     }
 }

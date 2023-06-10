@@ -7,16 +7,27 @@
         Title="MainWindow" Height="700" Width="300">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <ListView Height="300" Width="280" Margin="0, 15, 0, 0">
+            <ListView Height="300" Width="280" Margin="0, 15, 0, 0" ItemsSource="{Binding Songs}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Song"></GridViewColumn>
-                        <GridViewColumn Header="Album"></GridViewColumn>
-                        <GridViewColumn Header="Artist"></GridViewColumn>
-                        <GridViewColumn Header="TrackNumber"></GridViewColumn>
+                        <GridViewColumn Header="Song" Width="50" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Album" Width="60" DisplayMemberBinding="{Binding Album}"/>
+                        <GridViewColumn Header="Artist" Width="60" DisplayMemberBinding="{Binding Artist}"/>
+                        <GridViewColumn Header="TrackNumber" Width="80" DisplayMemberBinding="{Binding TrackNumber}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
+            <StackPanel 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Center" 
+                Width="280" 
+                Margin="0, 10, 0, 0">
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding AddSongCommand}">Add</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0">Play</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0">Pause</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0">Next</Button>
+                <Button Width="60" Height="20" Margin="0, 0, 10, 0">Previous</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
