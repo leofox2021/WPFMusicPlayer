@@ -1,18 +1,24 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Windows.Media;
 using WPFMusicPlayer.Command;
 using WPFMusicPlayer.Model;
 
 namespace WPFMusicPlayer.ViewModel
 {
+    // MainViewModel is a singleton
     public class MainViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private static MainViewModel _instance;
         private int _selectedSongIndex;
+        private double _duration;
+        private double _position;
         
-        public MainViewModel()
+        private MainViewModel()
         {
             Songs = SongController.Songs;
 
@@ -24,7 +30,8 @@ namespace WPFMusicPlayer.ViewModel
             PreviousSongCommand = new RelayCommand(GoPreviousSong, CanGoPreviousSong);
         }
 
-
+        public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
+        
         public int SelectedSongIndex
         {
             get => _selectedSongIndex; 
@@ -35,6 +42,27 @@ namespace WPFMusicPlayer.ViewModel
             }
         }
         
+        public double Position
+        {
+            get => _position;
+            set
+            {
+                _position = value > _duration ? _duration : value;
+                MusicPlayer.Instance.Position = _position;
+                OnPropertyChanged();
+            }
+        }
+
+        public double Duration
+        {
+            get => _duration;
+            set
+            {
+                _duration = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Song> Songs { get; set; }
         
         public ICommand AddSongCommand { get; set; }
@@ -44,22 +72,18 @@ namespace WPFMusicPlayer.ViewModel
         public ICommand NextSongCommand { get; set; }
         public ICommand PreviousSongCommand { get; set; }
         
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         
         private bool CanAddSong(object obj) => true;
 
         private void AddSong(object obj) => SongController.AddSong();
 
-        private void PlaySong(object obj) => MusicPlayer.Play(Songs[_selectedSongIndex]);
+        private void PlaySong(object obj) => MusicPlayer.Instance.Play(Songs[_selectedSongIndex]);
 
         private bool CanPlaySong(object obj) => true;
         
-        private void StopSong(object obj) => MusicPlayer.Stop();
+        private void StopSong(object obj) => MusicPlayer.Instance.Stop();
 
         private bool CanStopSong(object obj) => true;
         
@@ -67,20 +91,20 @@ namespace WPFMusicPlayer.ViewModel
         
         private void GoPreviousSong(object obj)
         {
-            SelectedSongIndex -= 1;
-            MusicPlayer.Play(Songs[_selectedSongIndex]);
+            SelectedSongIndex--;
+            MusicPlayer.Instance.Play(Songs[_selectedSongIndex--]);
         }
 
         private bool CanGoNextSong(object obj) => true;
 
         private void GoNextSong(object obj)
         {
-            SelectedSongIndex += 1;
-            MusicPlayer.Play(Songs[_selectedSongIndex]);
+            SelectedSongIndex++;
+            MusicPlayer.Instance.Play(Songs[_selectedSongIndex]);
         }
 
         private bool CanPauseSong(object obj) => true;
 
-        private void PauseSong(object obj) => MusicPlayer.Pause();
+        private void PauseSong(object obj) => MusicPlayer.Instance.Pause();
     }
 }

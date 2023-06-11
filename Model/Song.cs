@@ -8,6 +8,7 @@
         public string Album { get; set; }
         public string Artist { get; set; }
         public uint TrackNumber { get; set; }
+        public long Duration { get; set; } 
         public string FullPath { get; set; }
     }
 }

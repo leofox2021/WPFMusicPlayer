@@ -1,4 +1,7 @@
-﻿using WPFMusicPlayer.ViewModel;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
+using System.Windows.Input;
+using WPFMusicPlayer.ViewModel;
 
 namespace WPFMusicPlayer
 {
@@ -10,7 +13,7 @@ namespace WPFMusicPlayer
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = MainViewModel.Instance;
         }
     }
 }

@@ -22,6 +22,13 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <Slider 
+                Width="220" 
+                Margin="0, 10, 0, 0" 
+                Minimum="0"
+                Maximum="{Binding Duration}"
+                IsMoveToPointEnabled="True"
+                Value="{Binding Position}"/>
             <StackPanel 
                 Orientation="Horizontal" 
                 HorizontalAlignment="Center" 
