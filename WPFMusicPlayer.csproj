@@ -62,6 +62,7 @@
         </Compile>
         <Compile Include="Command\RelayCommand.cs" />
         <Compile Include="Model\MusicPlayer.cs" />
+        <Compile Include="Model\MusicPlayerController.cs" />
         <Compile Include="Model\Song.cs" />
         <Compile Include="Model\SongController.cs" />
         <Compile Include="ViewModel\MainViewModel.cs" />

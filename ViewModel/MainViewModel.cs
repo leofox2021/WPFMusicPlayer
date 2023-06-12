@@ -119,35 +119,24 @@ namespace WPFMusicPlayer.ViewModel
 
         private void AddSong(object obj) => SongController.AddSong();
 
-        private void PlaySong(object obj)
-        {
-            MusicPlayer.Instance.Play(Songs[_selectedSongIndex]);
-            Artwork = new BitmapImage();
-        } 
         private bool CanPlaySong(object obj) => true;
         
-        private void StopSong(object obj) => MusicPlayer.Instance.Stop();
-
+        private void PlaySong(object obj) => MusicPlayerController.OnPlay();
+        
         private bool CanStopSong(object obj) => true;
+
+        private void StopSong(object obj) => MusicPlayerController.OnStop();
         
         private bool CanGoPreviousSong(object obj) => true;
-        
-        private void GoPreviousSong(object obj)
-        {
-            SelectedSongIndex--;
-            MusicPlayer.Instance.Play(Songs[_selectedSongIndex--]);
-        }
+
+        private void GoPreviousSong(object obj) => MusicPlayerController.OnPreviousSong();
 
         private bool CanGoNextSong(object obj) => true;
 
-        private void GoNextSong(object obj)
-        {
-            SelectedSongIndex++;
-            MusicPlayer.Instance.Play(Songs[_selectedSongIndex]);
-        }
+        private void GoNextSong(object obj) => MusicPlayerController.OnNextSong();
 
         private bool CanPauseSong(object obj) => true;
 
-        private void PauseSong(object obj) => MusicPlayer.Instance.Pause();
+        private void PauseSong(object obj) => MusicPlayerController.OnPause();
     }
 }
