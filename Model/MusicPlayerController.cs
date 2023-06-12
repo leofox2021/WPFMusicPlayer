@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Management.Instrumentation;
 using WPFMusicPlayer.ViewModel;
 
 namespace WPFMusicPlayer.Model
@@ -7,6 +8,7 @@ namespace WPFMusicPlayer.Model
     {
         public static void OnNextSong()
         {
+            // Prevent the app from crashing due to index > Songs.Count
             MainViewModel.Instance.SelectedSongIndex = 
                 MainViewModel.Instance.SelectedSongIndex == MainViewModel.Instance.Songs.Count - 1 
                 ? MainViewModel.Instance.SelectedSongIndex 
@@ -17,6 +19,7 @@ namespace WPFMusicPlayer.Model
         
         public static void OnPreviousSong()
         {
+            // Prevent the app from crashing due to index < 0
             MainViewModel.Instance.SelectedSongIndex = MainViewModel.Instance.SelectedSongIndex == 0 
                 ? MainViewModel.Instance.SelectedSongIndex 
                 : MainViewModel.Instance.SelectedSongIndex - 1;
@@ -29,6 +32,7 @@ namespace WPFMusicPlayer.Model
             MusicPlayer.Instance.Play(SongController.Songs[MainViewModel.Instance.SelectedSongIndex]);
             MusicPlayer.Instance.Timer.Start();
             MainViewModel.Instance.Artwork = MusicPlayer.Instance.Song.Artwork;
+            MainViewModel.Instance.Volume = MusicPlayer.Instance.Volume;
         }
         
         public static void OnPause()
@@ -45,13 +49,14 @@ namespace WPFMusicPlayer.Model
             MainViewModel.Instance.Length = TimeSpanToString();
         }
         
-        // Happens on tick of timer which is located in MusicPlayer class
+        // Fires on tick of timer which is located in MusicPlayer class
         public static void UpdatePositionProperties(object sender, EventArgs e)
         {
             MainViewModel.Instance.Position = MusicPlayer.Instance.Position;
             MainViewModel.Instance.Timer = TimeSpanToString(MusicPlayer.Instance.MinutesNow, MusicPlayer.Instance.SecondsNow);
         }
         
+        // Fires on musicplayer open event
         public static void UpdateDurationProperties(object sender, EventArgs e)
         {
             MainViewModel.Instance.Duration = MusicPlayer.Instance.TotalSeconds;

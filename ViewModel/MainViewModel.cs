@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Windows.Forms.Automation;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WPFMusicPlayer.Command;
@@ -24,6 +19,7 @@ namespace WPFMusicPlayer.ViewModel
         private int _selectedSongIndex;
         private double _duration;
         private double _position;
+        private double _volume;
         
         private MainViewModel()
         {
@@ -89,6 +85,17 @@ namespace WPFMusicPlayer.ViewModel
             set
             {
                 _length = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public double Volume
+        {
+            get => _volume;
+            set
+            {
+                _volume = value;
+                MusicPlayer.Instance.Volume = value;
                 OnPropertyChanged();
             }
         }

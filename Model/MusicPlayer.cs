@@ -26,6 +26,7 @@ namespace WPFMusicPlayer.Model
 
         public Song Song => _song;
         public DispatcherTimer Timer => _timer;
+        
         public double Position
         {
             get => _player.Position.TotalSeconds;
@@ -33,6 +34,16 @@ namespace WPFMusicPlayer.Model
             {
                 if (value != _player.Position.Seconds) 
                     _player.Position = TimeSpan.FromSeconds(value);   
+            }
+        }
+        
+        public double Volume
+        {
+            get => _player.Volume;
+            set
+            {
+                if (_player.Volume != value)
+                    _player.Volume = value;   
             }
         }
 
