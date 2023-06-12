@@ -11,14 +11,11 @@ namespace WPFMusicPlayer.Model
         private readonly MediaPlayer _player;
         private DispatcherTimer _timer;
         private static MusicPlayer _instance;
-        private double _duration;
-        private double _previousTickPosition;
         
         private MusicPlayer()
         {
             _player = new MediaPlayer();
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _previousTickPosition = 0;
 
             _player.MediaOpened += PlayerOnMediaOpened;
             _player.MediaEnded += PlayerOnMediaEnded;
@@ -59,26 +56,32 @@ namespace WPFMusicPlayer.Model
         {
             _player.Stop();
             _player.Close();
-            
-            _duration = 0;
+
+            MainViewModel.Instance.Duration = 0;
+            MainViewModel.Instance.Timer = TimeSpanToString();
+            MainViewModel.Instance.Length = TimeSpanToString();
         }
         
+        // Timer tick event happens once in a second
         private void TimerOnTick(object sender, EventArgs e)
         {
             MainViewModel.Instance.Position = Position;
-            MainViewModel.Instance.Timer = GetStringPosition(_player.Position.Minutes, _player.Position.Seconds);
+            MainViewModel.Instance.Timer = TimeSpanToString(_player.Position.Minutes, _player.Position.Seconds);
         }
 
         // Load duration for the UI
         private void PlayerOnMediaOpened(object sender, EventArgs e)
         {
-            _duration = _player.NaturalDuration.TimeSpan.TotalSeconds;
-            MainViewModel.Instance.Duration = _duration;
+            MainViewModel.Instance.Duration = _player.NaturalDuration.TimeSpan.TotalSeconds;
+            MainViewModel.Instance.Length = TimeSpanToString(_player.NaturalDuration.TimeSpan.Minutes, 
+                _player.NaturalDuration.TimeSpan.Seconds);
         }
-        
+
         private void PlayerOnMediaEnded(object sender, EventArgs e) => Stop();
         
-        private string GetStringPosition(int minutes, int seconds) =>
+        // Gets a "mm:ss"-formatted string position of the given minutes and seconds value
+        // Returns "00:00" by deafult
+        private string TimeSpanToString(int minutes = 0, int seconds = 0) =>
             (minutes < 10 ? $"0{minutes}" : minutes.ToString()) + ":" + 
             (seconds < 10 ? $"0{seconds}" : seconds.ToString());
     }  

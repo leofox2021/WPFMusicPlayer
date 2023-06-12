@@ -16,6 +16,7 @@ namespace WPFMusicPlayer.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         private static MainViewModel _instance;
         private string _timer;
+        private string _length;
         private int _selectedSongIndex;
         private double _duration;
         private double _position;
@@ -30,6 +31,9 @@ namespace WPFMusicPlayer.ViewModel
             StopSongCommand = new RelayCommand(StopSong, CanStopSong);
             NextSongCommand = new RelayCommand(GoNextSong, CanGoNextSong);
             PreviousSongCommand = new RelayCommand(GoPreviousSong, CanGoPreviousSong);
+
+            _timer = "00:00";
+            _length = "00:00";
         }
 
         public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
@@ -71,6 +75,16 @@ namespace WPFMusicPlayer.ViewModel
             set
             {
                 _duration = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public string Length
+        {
+            get => _length;
+            set
+            {
+                _length = value;
                 OnPropertyChanged();
             }
         }
