@@ -1,5 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
+using TagLib;
 
 namespace WPFMusicPlayer.Model
 {
@@ -24,9 +27,22 @@ namespace WPFMusicPlayer.Model
                     Artist = musicFile.Tag.FirstAlbumArtist,
                     TrackNumber = musicFile.Tag.Track,
                     Duration = musicFile.Length,
-                    FullPath = openFileDialog.FileName
+                    FullPath = openFileDialog.FileName,
+                    Artwork = GetAlbumArtwork(musicFile.Tag.Pictures[0])
                 });
             }
+        }
+        
+        private static BitmapImage GetAlbumArtwork(IPicture picture)
+        {
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = new MemoryStream(picture.Data.Data);;
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            bitmap.EndInit();
+            bitmap.Freeze();
+
+            return bitmap;
         }
     }
 }

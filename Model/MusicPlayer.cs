@@ -11,6 +11,7 @@ namespace WPFMusicPlayer.Model
         private readonly MediaPlayer _player;
         private DispatcherTimer _timer;
         private static MusicPlayer _instance;
+        private Song _song;
         
         private MusicPlayer()
         {
@@ -34,15 +35,21 @@ namespace WPFMusicPlayer.Model
             }
         }
 
+        public Song Song => _song;
+
         // Plays a new song
         public void Play(Song song = null)
         {
             // Check if the song is already opened
             if (song != null && _player.Source != new Uri(song.FullPath))
+            {
                 _player.Open(new Uri(song.FullPath));
+                _song = song;
+            }
             
             _timer.Start();
             _player.Play();
+            MainViewModel.Instance.Artwork = _song.Artwork;
         }
 
         public void Pause()

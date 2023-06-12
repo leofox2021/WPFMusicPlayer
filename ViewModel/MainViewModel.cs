@@ -2,9 +2,12 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows.Forms.Automation;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using WPFMusicPlayer.Command;
 using WPFMusicPlayer.Model;
 
@@ -15,6 +18,7 @@ namespace WPFMusicPlayer.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private static MainViewModel _instance;
+        private BitmapImage _artwork;
         private string _timer;
         private string _length;
         private int _selectedSongIndex;
@@ -88,6 +92,16 @@ namespace WPFMusicPlayer.ViewModel
                 OnPropertyChanged();
             }
         }
+        
+        public BitmapImage Artwork
+        {
+            get => _artwork;
+            set
+            {
+                _artwork = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Song> Songs { get; set; }
         
@@ -105,8 +119,11 @@ namespace WPFMusicPlayer.ViewModel
 
         private void AddSong(object obj) => SongController.AddSong();
 
-        private void PlaySong(object obj) => MusicPlayer.Instance.Play(Songs[_selectedSongIndex]);
-
+        private void PlaySong(object obj)
+        {
+            MusicPlayer.Instance.Play(Songs[_selectedSongIndex]);
+            Artwork = new BitmapImage();
+        } 
         private bool CanPlaySong(object obj) => true;
         
         private void StopSong(object obj) => MusicPlayer.Instance.Stop();

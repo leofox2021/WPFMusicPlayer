@@ -1,4 +1,7 @@
-﻿namespace WPFMusicPlayer.Model
+﻿using System.Windows.Media.Imaging;
+using TagLib;
+
+namespace WPFMusicPlayer.Model
 {
     public class Song
     {
@@ -10,5 +13,6 @@
         public uint TrackNumber { get; set; }
         public long Duration { get; set; } 
         public string FullPath { get; set; }
+        public BitmapImage Artwork { get; set; }
     }
 }
