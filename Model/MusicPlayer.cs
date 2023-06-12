@@ -63,8 +63,12 @@ namespace WPFMusicPlayer.Model
             _duration = 0;
         }
         
-        private void TimerOnTick(object sender, EventArgs e) => MainViewModel.Instance.Position = Position;
-        
+        private void TimerOnTick(object sender, EventArgs e)
+        {
+            MainViewModel.Instance.Position = Position;
+            MainViewModel.Instance.Timer = GetStringPosition(_player.Position.Minutes, _player.Position.Seconds);
+        }
+
         // Load duration for the UI
         private void PlayerOnMediaOpened(object sender, EventArgs e)
         {
@@ -73,5 +77,9 @@ namespace WPFMusicPlayer.Model
         }
         
         private void PlayerOnMediaEnded(object sender, EventArgs e) => Stop();
+        
+        private string GetStringPosition(int minutes, int seconds) =>
+            (minutes < 10 ? $"0{minutes}" : minutes.ToString()) + ":" + 
+            (seconds < 10 ? $"0{seconds}" : seconds.ToString());
     }  
 }

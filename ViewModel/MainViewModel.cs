@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms.Automation;
 using System.Windows.Input;
 using WPFMusicPlayer.Command;
 using WPFMusicPlayer.Model;
@@ -14,6 +15,7 @@ namespace WPFMusicPlayer.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private static MainViewModel _instance;
+        private string _timer;
         private int _selectedSongIndex;
         private double _duration;
         private double _position;
@@ -31,6 +33,16 @@ namespace WPFMusicPlayer.ViewModel
         }
 
         public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
+        
+        public string Timer
+        {
+            get => _timer;
+            set
+            {
+                _timer = value;
+                OnPropertyChanged();
+            }
+        }
         
         public int SelectedSongIndex
         {
