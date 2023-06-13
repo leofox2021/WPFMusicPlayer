@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Management.Instrumentation;
 using WPFMusicPlayer.ViewModel;
 
 namespace WPFMusicPlayer.Model

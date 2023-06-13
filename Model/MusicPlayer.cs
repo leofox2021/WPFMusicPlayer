@@ -57,10 +57,10 @@ namespace WPFMusicPlayer.Model
         public void Play(Song song = null)
         {
             // Check if the song is already opened
-            if (song != null && _player.Source != new Uri(song.FullPath))
+            if (song != null && song != _song)
             {
-                _player.Open(new Uri(song.FullPath));
                 _song = song;
+                _player.Open(new Uri(song.FullPath));
             }
             
             _player.Play();
