@@ -5,32 +5,63 @@
 <!-- WHEN I DEVELOP A GREAT UI YOU WON'T BE SEEING THIS ANYMORE!!!!!!! -->
 <!-- THANK YOU!!!!! HAVE A NICE DAY. -->
 
-<Window x:Class="WPFMusicPlayer.MainWindow"
+<Window x:Class="WPFMusicPlayer.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="500">
+        Title="MainWindow" Height="800" Width="700">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <ListView 
-                Height="300" 
-                Width="280" 
-                Margin="0, 15, 0, 0" 
-                ItemsSource="{Binding Songs}"
-                SelectedIndex="{Binding SelectedSongIndex}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Song" Width="50" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                        <GridViewColumn Header="Album" Width="60" DisplayMemberBinding="{Binding Album}"/>
-                        <GridViewColumn Header="Artist" Width="60" DisplayMemberBinding="{Binding Artist}"/>
-                        <GridViewColumn Header="TrackNumber" Width="80" DisplayMemberBinding="{Binding TrackNumber}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <StackPanel Orientation="Horizontal">  
-                <TextBlock Width="30" Margin="80, 0, 10, 0" Text="{Binding Timer}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock 
+                    Text="Playlists" 
+                    FontSize="30" 
+                    FontWeight="Bold"
+                    Margin="130, 10, 0, 0"/>
+                <TextBlock 
+                    Text="Songs" 
+                    FontSize="30" 
+                    FontWeight="Bold"
+                    Margin="210, 10, 0, 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ListView 
+                    Height="300" 
+                    Width="280" 
+                    Margin="50, 15, 0, 0"
+                    ItemsSource="{Binding Playlists}"
+                    SelectedIndex="{Binding SelectedPlaylistIndex}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Playlist Name" Width="100"/>
+                            <GridViewColumn Header="Full path" Width="80"/>
+                            <GridViewColumn Header="Songs" Width="50"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView 
+                    Height="300" 
+                    Width="280" 
+                    Margin="30, 15, 0, 0" 
+                    ItemsSource="{Binding Songs}"
+                    SelectedIndex="{Binding SelectedSongIndex}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Song" Width="50" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                            <GridViewColumn Header="Album" Width="60" DisplayMemberBinding="{Binding Album}"/>
+                            <GridViewColumn Header="Artist" Width="60" DisplayMemberBinding="{Binding Artist}"/>
+                            <GridViewColumn Header="TrackNumber" Width="80" DisplayMemberBinding="{Binding TrackNumber}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>    
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="700" Margin="0, 0, 0, 0">
+                <Button Width="40" Height="20" Margin="60, 0, 10, 0" Command="{Binding AddSongCommand}">Add</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PlaySongCommand}">Next</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PauseSongCommand}">Previous</Button>  
+                <TextBlock Width="30" Margin="120, 10, 10, 0" Text="{Binding Timer}"/>
                 <Slider
                     ToolTip="{Binding Timer}"
                     Width="260" 
@@ -40,25 +71,25 @@
                     IsMoveToPointEnabled="True"
                     Value="{Binding Position}">
                 </Slider>
-                <TextBlock Width="30" Margin="10, 0, 10, 0" Text="{Binding Length}"/>
+                <TextBlock Width="30" Margin="10, 10, 10, 0" Text="{Binding Length}"/>
             </StackPanel>
             <StackPanel 
                 Orientation="Horizontal" 
                 HorizontalAlignment="Center" 
                 Width="280" 
-                Margin="0, 10, 0, 0">
+                Margin="325, 10, 0, 0">
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding AddSongCommand}">Add</Button>
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PlaySongCommand}">Play</Button>
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PauseSongCommand}">Pause</Button>
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding NextSongCommand}">Next</Button>
                 <Button Width="60" Height="20" Margin="0, 0, 10, 0" Command="{Binding PreviousSongCommand}">Previous</Button>
             </StackPanel>
-            <StackPanel Width="200" Height="200" Margin="0, 15, 0, 0" Orientation="Horizontal">
+            <StackPanel Width="200" Height="200" Margin="300, 15, 0, 0" Orientation="Horizontal">
                 <Border Width="200" Height="200" BorderThickness="1" BorderBrush="Black">
                     <Image Width="200" Height="200" Source="{Binding Artwork}"></Image>
                 </Border>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="275, 0, 0 ,0">
                 <Slider 
                     Height="20" 
                     Width="200" 

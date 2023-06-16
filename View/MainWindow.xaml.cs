@@ -1,6 +1,6 @@
 ﻿using WPFMusicPlayer.ViewModel;
 
-namespace WPFMusicPlayer
+namespace WPFMusicPlayer.View
 {
     public partial class MainWindow
     {
