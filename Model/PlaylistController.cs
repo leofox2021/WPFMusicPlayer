@@ -46,7 +46,7 @@ namespace WPFMusicPlayer.Model
         
         public void OnAddSongsToPlaylist()
         {
-            
+            Playlists[MainViewModel.Instance.SelectedSongIndex].LoadSogns(FileDialogs.Song);
         }
     }
 }
