@@ -11,6 +11,7 @@ namespace WPFMusicPlayer.Model
     {
         public Playlist(string path)
         {
+            Songs = new ObservableCollection<Song>();
             Path = path;
             Name = path.Equals(ConstantStrings.DefaultPlaylistPath) 
                 ? ConstantStrings.DefaultPlaylist 
@@ -20,9 +21,9 @@ namespace WPFMusicPlayer.Model
                 LoadSongsFromM3U();
         }
         
-        public ObservableCollection<Song> Songs { get; set; }
-        public string Path;
-        public string Name;
+        public ObservableCollection<Song> Songs { get; private set; }
+        public string Path { get; }
+        public string Name { get; private set; }
         public int SongQuantity => Songs.Count;
         
         public void LoadSogns(string[] paths)

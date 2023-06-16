@@ -25,8 +25,7 @@ namespace WPFMusicPlayer.ViewModel
         
         private MainViewModel()
         {
-            Songs = SongController.Songs;
-            Playlists = PlaylistController.Playlists;
+            Playlists = PlaylistController.Instance.Playlists;
             
             AddSongCommand = new RelayCommand(AddSong, CanAddSong);
             
@@ -48,7 +47,7 @@ namespace WPFMusicPlayer.ViewModel
 
         private bool CanCreateNewPlaylist(object obj) => true;
 
-        private void CreateNewPlaylist(object obj) => PlaylistController.OnCreateNewPlaylist();
+        private void CreateNewPlaylist(object obj) => PlaylistController.Instance.OnCreateNewPlaylist();
 
         public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
         
@@ -134,16 +133,7 @@ namespace WPFMusicPlayer.ViewModel
             }
         }
 
-        public ObservableCollection<Song> Songs
-        {
-            get => _songs; 
-            set
-            {
-                _songs = value;
-                OnPropertyChanged();
-            }
-        }
-        
+        public ObservableCollection<Song> Songs => Playlists[_selectedPlaylistIndex].Songs;
         public ObservableCollection<Playlist> Playlists { get; set; }
 
         public ICommand AddSongCommand { get; set; }
@@ -186,14 +176,14 @@ namespace WPFMusicPlayer.ViewModel
         
         private bool CanGoPreviousPlaylist(object obj) => true;
 
-        private void GoPreviousPlaylist(object obj) => PlaylistController.OnPreviousPlaylist();
+        private void GoPreviousPlaylist(object obj) => PlaylistController.Instance.OnPreviousPlaylist();
 
         private bool CanGoNextPlaylist(object obj) => true;
 
-        private void GoNextPlaylist(object obj) => PlaylistController.OnNextPlaylist();
+        private void GoNextPlaylist(object obj) => PlaylistController.Instance.OnNextPlaylist();
 
         private bool CanAddPlaylist(object obj) => true;
 
-        private void AddPlaylist(object obj) => PlaylistController.OnAddPlaylist();
+        private void AddPlaylist(object obj) => PlaylistController.Instance.OnAddPlaylist();
     }
 }

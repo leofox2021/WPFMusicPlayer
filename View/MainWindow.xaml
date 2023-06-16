@@ -36,9 +36,9 @@
                     SelectedIndex="{Binding SelectedPlaylistIndex}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Playlist Name" Width="100"/>
-                            <GridViewColumn Header="Full path" Width="80"/>
-                            <GridViewColumn Header="Songs" Width="50"/>
+                            <GridViewColumn Header="Playlist Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Full path" Width="80" DisplayMemberBinding="{Binding Path}"/>
+                            <GridViewColumn Header="Songs" Width="50" DisplayMemberBinding="{Binding SongQuantity}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
