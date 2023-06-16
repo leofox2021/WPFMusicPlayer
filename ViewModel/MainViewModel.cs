@@ -190,7 +190,7 @@ namespace WPFMusicPlayer.ViewModel
 
         private bool CanGoNextPlaylist(object obj) => true;
 
-        private void GoNextPlaylist(object obj) => PlaylistController.OnPreviousPlaylist();
+        private void GoNextPlaylist(object obj) => PlaylistController.OnNextPlaylist();
 
         private bool CanAddPlaylist(object obj) => true;
 

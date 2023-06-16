@@ -60,10 +60,10 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" Width="700" Margin="0, 0, 0, 0">
-                <Button Width="40" Height="20" Margin="53, 0, 10, 0" Command="{Binding AddSongCommand}">New</Button>
-                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PlaySongCommand}">Add</Button>
-                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PlaySongCommand}">Next</Button>
-                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PauseSongCommand}">Previous</Button>  
+                <Button Width="40" Height="20" Margin="53, 0, 10, 0" Command="{Binding NewPlaylistCommand}">New</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding AddPlaylistCommand}">Add</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding NextPlaylistCommand}">Next</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PreviousPlaylistCommand}">Previous</Button>  
                 <TextBlock Width="30" Margin="80, 10, 10, 0" Text="{Binding Timer}"/>
                 <Slider
                     ToolTip="{Binding Timer}"
