@@ -37,6 +37,7 @@ namespace WPFMusicPlayer.ViewModel
             
             NewPlaylistCommand = new RelayCommand(CreateNewPlaylist, CanCreateNewPlaylist);
             AddPlaylistCommand = new RelayCommand(AddPlaylist, CanAddPlaylist);
+            SavePlaylistCommand = new RelayCommand(SavePlaylist, CanSavePlaylist);
             
             NextPlaylistCommand = new RelayCommand(GoNextPlaylist, CanGoNextPlaylist);
             PreviousPlaylistCommand = new RelayCommand(GoPreviousPlaylist, CanGoPreviousPlaylist);
@@ -44,10 +45,6 @@ namespace WPFMusicPlayer.ViewModel
             _timer = "00:00";
             _length = "00:00";
         }
-
-        private bool CanCreateNewPlaylist(object obj) => true;
-
-        private void CreateNewPlaylist(object obj) => PlaylistController.Instance.OnCreateNewPlaylist();
 
         public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
         
@@ -144,6 +141,7 @@ namespace WPFMusicPlayer.ViewModel
         public ICommand PreviousSongCommand { get; set; }
         public ICommand NewPlaylistCommand { get; set; }
         public ICommand AddPlaylistCommand { get; set; }
+        public ICommand SavePlaylistCommand { get; set; }
         public ICommand NextPlaylistCommand { get; set; }
         public ICommand PreviousPlaylistCommand { get; set; }
         
@@ -185,5 +183,13 @@ namespace WPFMusicPlayer.ViewModel
         private bool CanAddPlaylist(object obj) => true;
 
         private void AddPlaylist(object obj) => PlaylistController.Instance.OnAddPlaylist();
+        
+        private bool CanSavePlaylist(object obj) => true;
+
+        private void SavePlaylist(object obj) => PlaylistController.Instance.OnSavePlaylist();
+
+        private bool CanCreateNewPlaylist(object obj) => true;
+
+        private void CreateNewPlaylist(object obj) => PlaylistController.Instance.OnCreateNewPlaylist();
     }
 }

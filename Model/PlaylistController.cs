@@ -38,5 +38,10 @@ namespace WPFMusicPlayer.Model
             if (!Playlists.Any(n => n.Name == ConstantStrings.DefaultPlaylist))
                 Playlists.Add(new Playlist(ConstantStrings.DefaultPlaylistPath));
         }
+        
+        public void OnSavePlaylist()
+        {
+            
+        }
     }
 }
