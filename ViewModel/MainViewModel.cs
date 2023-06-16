@@ -18,6 +18,7 @@ namespace WPFMusicPlayer.ViewModel
         private string _timer;
         private string _length;
         private int _selectedSongIndex;
+        private int _selectedPlaylistIndex;
         private double _duration;
         private double _position;
         private double _volume;
@@ -28,18 +29,26 @@ namespace WPFMusicPlayer.ViewModel
             Playlists = PlaylistController.Playlists;
             
             AddSongCommand = new RelayCommand(AddSong, CanAddSong);
+            
             PlaySongCommand = new RelayCommand(PlaySong, CanPlaySong);
             PauseSongCommand = new RelayCommand(PauseSong, CanPauseSong);
             StopSongCommand = new RelayCommand(StopSong, CanStopSong);
             NextSongCommand = new RelayCommand(GoNextSong, CanGoNextSong);
             PreviousSongCommand = new RelayCommand(GoPreviousSong, CanGoPreviousSong);
+            
+            NewPlaylistCommand = new RelayCommand(CreateNewPlaylist, CanCreateNewPlaylist);
             AddPlaylistCommand = new RelayCommand(AddPlaylist, CanAddPlaylist);
+            
             NextPlaylistCommand = new RelayCommand(GoNextPlaylist, CanGoNextPlaylist);
             PreviousPlaylistCommand = new RelayCommand(GoPreviousPlaylist, CanGoPreviousPlaylist);
 
             _timer = "00:00";
             _length = "00:00";
         }
+
+        private bool CanCreateNewPlaylist(object obj) => true;
+
+        private void CreateNewPlaylist(object obj) => PlaylistController.OnCreateNewPlaylist();
 
         public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
         
@@ -59,6 +68,16 @@ namespace WPFMusicPlayer.ViewModel
             set
             {
                 _selectedSongIndex = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public int SelectedPlaylistIndex
+        {
+            get => _selectedPlaylistIndex;
+            set
+            {
+                _selectedPlaylistIndex = value;
                 OnPropertyChanged();
             }
         }
@@ -133,6 +152,7 @@ namespace WPFMusicPlayer.ViewModel
         public ICommand StopSongCommand { get; set; }
         public ICommand NextSongCommand { get; set; }
         public ICommand PreviousSongCommand { get; set; }
+        public ICommand NewPlaylistCommand { get; set; }
         public ICommand AddPlaylistCommand { get; set; }
         public ICommand NextPlaylistCommand { get; set; }
         public ICommand PreviousPlaylistCommand { get; set; }

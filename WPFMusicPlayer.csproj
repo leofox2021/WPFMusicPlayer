@@ -61,6 +61,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Compile Include="Command\RelayCommand.cs" />
+        <Compile Include="Model\Database.cs" />
         <Compile Include="Model\FileDialogs.cs" />
         <Compile Include="Model\MusicPlayer.cs" />
         <Compile Include="Model\MusicPlayerController.cs" />

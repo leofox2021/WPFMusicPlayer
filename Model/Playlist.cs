@@ -11,9 +11,13 @@ namespace WPFMusicPlayer.Model
     {
         public Playlist(string path)
         {
-            if (!path.Equals("default")) LoadSongsFromM3U(path); Path = "default";
             Path = path;
-            Name = path.Equals("default") ? "Default Playlist" : PathManager.GetFileName(path);
+            Name = path.Equals(ConstantStrings.DefaultPlaylistPath) 
+                ? ConstantStrings.DefaultPlaylist 
+                : PathManager.GetFileName(path);
+            
+            if (!path.Equals("default"))
+                LoadSongsFromM3U();
         }
         
         public ObservableCollection<Song> Songs { get; set; }
@@ -27,9 +31,9 @@ namespace WPFMusicPlayer.Model
                 LoadSong(path);
         }
         
-        private void LoadSongsFromM3U(string path)
+        public void LoadSongsFromM3U()
         {
-            foreach (var line in File.ReadAllLines(path))
+            foreach (var line in File.ReadAllLines(Path))
                 LoadSong(line);
         } 
 

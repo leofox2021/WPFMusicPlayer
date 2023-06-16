@@ -13,6 +13,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="700">
     <Grid>
+        
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock 
@@ -57,11 +58,13 @@
                     </ListView.View>
                 </ListView>    
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Width="700" Margin="0, 0, 0, 0">
-                <Button Width="40" Height="20" Margin="60, 0, 10, 0" Command="{Binding AddSongCommand}">Add</Button>
+                <Button Width="40" Height="20" Margin="53, 0, 10, 0" Command="{Binding AddSongCommand}">New</Button>
+                <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PlaySongCommand}">Add</Button>
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PlaySongCommand}">Next</Button>
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding PauseSongCommand}">Previous</Button>  
-                <TextBlock Width="30" Margin="120, 10, 10, 0" Text="{Binding Timer}"/>
+                <TextBlock Width="30" Margin="80, 10, 10, 0" Text="{Binding Timer}"/>
                 <Slider
                     ToolTip="{Binding Timer}"
                     Width="260" 
@@ -73,6 +76,7 @@
                 </Slider>
                 <TextBlock Width="30" Margin="10, 10, 10, 0" Text="{Binding Length}"/>
             </StackPanel>
+            
             <StackPanel 
                 Orientation="Horizontal" 
                 HorizontalAlignment="Center" 
@@ -84,11 +88,13 @@
                 <Button Width="40" Height="20" Margin="0, 0, 10, 0" Command="{Binding NextSongCommand}">Next</Button>
                 <Button Width="60" Height="20" Margin="0, 0, 10, 0" Command="{Binding PreviousSongCommand}">Previous</Button>
             </StackPanel>
+            
             <StackPanel Width="200" Height="200" Margin="300, 15, 0, 0" Orientation="Horizontal">
                 <Border Width="200" Height="200" BorderThickness="1" BorderBrush="Black">
                     <Image Width="200" Height="200" Source="{Binding Artwork}"></Image>
                 </Border>
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="275, 0, 0 ,0">
                 <Slider 
                     Height="20" 
@@ -104,6 +110,7 @@
                     Margin="10, 10, 0, 0"
                     Text="Volume"/>
             </StackPanel>
+            
         </StackPanel>
     </Grid>
 </Window>
