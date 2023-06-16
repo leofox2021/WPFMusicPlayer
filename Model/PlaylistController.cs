@@ -43,5 +43,10 @@ namespace WPFMusicPlayer.Model
         {
             
         }
+        
+        public void OnAddSongsToPlaylist()
+        {
+            
+        }
     }
 }

@@ -4,8 +4,8 @@ namespace WPFMusicPlayer.Model
 {
     public static class FileDialogs
     {
-        public static string[] Playlist() => Dialog("Playlists (*.m3u)|*.m3u|");
-        public static string[] Song => Dialog("MP3 files (*.mp3)|*.mp3|");
+        public static string[] Playlist() => Dialog("Playlists (*.m3u)|*.m3u");
+        public static string[] Song => Dialog("MP3 files (*.mp3)|*.mp3");
         
         private static string[] Dialog(string filter)
         {

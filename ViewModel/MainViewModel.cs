@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using WPFMusicPlayer.Command;
 using WPFMusicPlayer.Model;
+using RelayCommand = WPFMusicPlayer.Command.RelayCommand;
 
 namespace WPFMusicPlayer.ViewModel
 {
@@ -150,7 +152,7 @@ namespace WPFMusicPlayer.ViewModel
         
         private bool CanAddSong(object obj) => true;
 
-        private void AddSong(object obj) => SongController.AddSong();
+        private void AddSong(object obj) => PlaylistController.Instance.OnAddSongsToPlaylist();  
 
         private bool CanPlaySong(object obj) => true;
         

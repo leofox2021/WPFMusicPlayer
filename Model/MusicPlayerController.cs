@@ -28,7 +28,8 @@ namespace WPFMusicPlayer.Model
         
         public static void OnPlay()
         {
-            MusicPlayer.Instance.Play(SongController.Songs[MainViewModel.Instance.SelectedSongIndex]);
+            MusicPlayer.Instance.Play(PlaylistController.Instance.Playlists[MainViewModel.Instance.SelectedPlaylistIndex]
+                .Songs[MainViewModel.Instance.SelectedSongIndex]);
             MusicPlayer.Instance.Timer.Start();
             MainViewModel.Instance.Artwork = MusicPlayer.Instance.Song.Artwork;
             MainViewModel.Instance.Volume = MusicPlayer.Instance.Volume;
