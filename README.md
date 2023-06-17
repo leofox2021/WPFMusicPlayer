@@ -8,3 +8,9 @@ While doing its job pretty well, the code rapidly became awful to maintain, due 
 write such applications by the time.
 Now that I've switched to C# / .Net / WPF, I want to rebuild the app from scratch, using all of my knowledge and meanwhile
 mastering the MVVM pattern.
+
+
+-----------------
+
+The player uses TagLib C# library for grabbing audio file tags (https://github.com/mono/taglib-sharp) and .Net Community Toolkit for easier MVVM implementation (https://github.com/CommunityToolkit).
+
