@@ -9,12 +9,7 @@ public static class FileDialogs
         
     private static string[] Dialog(string filter)
     {
-        var openFileDialog = new OpenFileDialog
-        {
-            Filter = filter,
-            Multiselect = true
-        };
-
+        var openFileDialog = new OpenFileDialog { Filter = filter, Multiselect = true};
         return openFileDialog.ShowDialog() == DialogResult.OK ? openFileDialog.FileNames : new string[] { };
     }
 }

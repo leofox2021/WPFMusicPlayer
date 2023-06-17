@@ -52,7 +52,7 @@ public static class MusicPlayerController
     public static void UpdatePositionProperties(object sender, EventArgs e)
     {
         MainViewModel.Instance.PositionTimeSpan = MusicPlayer.Instance.Player.Position;
-        MainViewModel.Instance.Position = MusicPlayer.Instance.Player.Position.TotalSeconds;
+        MainViewModel.Instance.SliderPosition = MusicPlayer.Instance.Player.Position.TotalSeconds;
     }
         
     // Fires on musicplayer open event

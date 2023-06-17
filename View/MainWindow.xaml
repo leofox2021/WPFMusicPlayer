@@ -73,7 +73,7 @@
                     Minimum="0"
                     Maximum="{Binding Duration}"
                     IsMoveToPointEnabled="True"
-                    Value="{Binding Position}">
+                    Value="{Binding SliderPosition}">
                 </Slider>
                 <TextBlock Width="30" Margin="10, 10, 10, 0" Text="{Binding Length}"/>
             </StackPanel>

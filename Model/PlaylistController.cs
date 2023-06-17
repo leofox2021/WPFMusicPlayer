@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using WPFMusicPlayer.ViewModel;
 
 namespace WPFMusicPlayer.Model
@@ -29,8 +28,7 @@ namespace WPFMusicPlayer.Model
         
         public void OnCreateNewPlaylist()
         {
-            if (!Playlists.Any(n => n.Name == ConstantStrings.DefaultPlaylist))
-                Playlists.Add(new Playlist(ConstantStrings.DefaultPlaylistPath));
+            Playlists.Add(new Playlist(ConstantStrings.DefaultPlaylistPath));
         }
         
         public void OnSavePlaylist()

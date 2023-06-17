@@ -20,6 +20,7 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Timer))]
+    [NotifyPropertyChangedFor(nameof(SliderPosition))]
     private TimeSpan _positionTimeSpan;
 
     [ObservableProperty]
@@ -34,6 +35,7 @@ public partial class MainViewModel : ObservableObject
     private int _selectedPlaylistIndex;
         
     private static MainViewModel _instance;
+    
     private double _position;
     private double _volume;
         
@@ -64,19 +66,19 @@ public partial class MainViewModel : ObservableObject
 
     public double Duration => _naturalDuration.HasTimeSpan ? _naturalDuration.TimeSpan.TotalSeconds : 0;
 
-    public string Length => _naturalDuration.HasTimeSpan
-        ? TimeDisplayService.ConvertToProperTimeFormat(
-            _naturalDuration.TimeSpan.Minutes,
-            _naturalDuration.TimeSpan.Seconds
-        )
-        : TimeDisplayService.ConvertToProperTimeFormat();
+    public string Length => TimeDisplayService.ConvertToProperTimeFormat
+    (
+        _naturalDuration.HasTimeSpan ? _naturalDuration.TimeSpan.Minutes : 0,
+        _naturalDuration.HasTimeSpan ? _naturalDuration.TimeSpan.Seconds : 0
+    );
         
-    public double Position
+    public double SliderPosition
     {
         get => _position;
         set
         {
-            MusicPlayer.Instance.Position = _position;
+            _position = value;
+            MusicPlayer.Instance.Position = value;
             OnPropertyChanged();
         }
     }
