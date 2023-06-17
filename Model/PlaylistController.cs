@@ -17,16 +17,10 @@ namespace WPFMusicPlayer.Model
         public static PlaylistController Instance => _instance ?? (_instance = new PlaylistController());
         public ObservableCollection<Playlist> Playlists { get; private set; }
         
-        public void OnNextPlaylist()
-        {
-            MainViewModel.Instance.SelectedPlaylistIndex++;
-        }
+        public void OnNextPlaylist() => MainViewModel.Instance.SelectedPlaylistIndex++;
         
-        public void OnPreviousPlaylist()
-        {
-            MainViewModel.Instance.SelectedPlaylistIndex--;   
-        }
-        
+        public void OnPreviousPlaylist() => MainViewModel.Instance.SelectedPlaylistIndex--;   
+
         public void OnAddPlaylist()
         {
             foreach (var playlistPath in FileDialogs.Playlist())
@@ -44,9 +38,7 @@ namespace WPFMusicPlayer.Model
             
         }
         
-        public void OnAddSongsToPlaylist()
-        {
-            
-        }
+        public void OnAddSongsToPlaylist() =>
+            Playlists[MainViewModel.Instance.SelectedPlaylistIndex].LoadSogns(FileDialogs.Song);
     }
 }

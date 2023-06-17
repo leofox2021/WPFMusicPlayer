@@ -1,8 +1,7 @@
-﻿namespace WPFMusicPlayer.Model
+﻿namespace WPFMusicPlayer.Model;
+
+public static class ConstantStrings
 {
-    public static class ConstantStrings
-    {
-        public const string DefaultPlaylist = "Default Playlist";
-        public const string DefaultPlaylistPath = "default";
-    }
+    public const string DefaultPlaylist = "Default Playlist";
+    public const string DefaultPlaylistPath = "default";
 }

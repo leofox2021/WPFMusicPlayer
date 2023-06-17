@@ -1,13 +1,12 @@
 ﻿using WPFMusicPlayer.ViewModel;
 
-namespace WPFMusicPlayer.View
+namespace WPFMusicPlayer.View;
+
+public partial class MainWindow
 {
-    public partial class MainWindow
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = MainViewModel.Instance;
-        }
+        InitializeComponent();
+        DataContext = MainViewModel.Instance;
     }
 }
