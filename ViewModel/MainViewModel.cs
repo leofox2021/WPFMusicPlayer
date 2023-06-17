@@ -11,9 +11,16 @@ using RelayCommand = WPFMusicPlayer.Command.RelayCommand;
 namespace WPFMusicPlayer.ViewModel
 {
     // MainViewModel is a singleton
-    public class MainViewModel : ObservableObject
+    public class MainViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private static MainViewModel _instance;
+        private BitmapImage _artwork;
+        private ObservableCollection<Song> _songs;
+        private string _timer;
+        private string _length;
+        private int _selectedSongIndex;
+        private int _selectedPlaylistIndex;
         private double _duration;
         private double _position;
         private double _volume;
@@ -37,20 +44,41 @@ namespace WPFMusicPlayer.ViewModel
             NextPlaylistCommand = new RelayCommand(GoNextPlaylist, CanGoNextPlaylist);
             PreviousPlaylistCommand = new RelayCommand(GoPreviousPlaylist, CanGoPreviousPlaylist);
 
-            Timer = "00:00";
-            Length = "00:00";
+            _timer = "00:00";
+            _length = "00:00";
         }
 
-        public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel());
-
-        [ObservableProperty] 
-        public string Timer = "00:00";
-
-        [ObservableProperty] 
-        public int SelectedSongIndex;
-
-        [ObservableProperty] 
-        public int SelectedPlaylistIndex;
+        public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel()); 
+        
+        public string Timer
+        {
+            get => _timer;
+            set
+            {
+                _timer = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public int SelectedSongIndex
+        {
+            get => _selectedSongIndex; 
+            set
+            {
+                _selectedSongIndex = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public int SelectedPlaylistIndex
+        {
+            get => _selectedPlaylistIndex;
+            set
+            {
+                _selectedPlaylistIndex = value;
+                OnPropertyChanged();
+            }
+        }
         
         public double Position
         {
@@ -72,9 +100,16 @@ namespace WPFMusicPlayer.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        [ObservableProperty] 
-        public string Length;
+        
+        public string Length
+        {
+            get => _length;
+            set
+            {
+                _length = value;
+                OnPropertyChanged();
+            }
+        }
         
         public double Volume
         {
@@ -86,11 +121,18 @@ namespace WPFMusicPlayer.ViewModel
                 OnPropertyChanged();
             }
         }
+        
+        public BitmapImage Artwork
+        {
+            get => _artwork;
+            set
+            {
+                _artwork = value;
+                OnPropertyChanged();
+            }
+        }
 
-        [ObservableProperty] 
-        public BitmapImage Artwork;
-
-        public ObservableCollection<Song> Songs => Playlists[SelectedPlaylistIndex].Songs;
+        public ObservableCollection<Song> Songs => Playlists[_selectedPlaylistIndex].Songs;
         public ObservableCollection<Playlist> Playlists { get; set; }
 
         public ICommand AddSongCommand { get; set; }
@@ -104,6 +146,9 @@ namespace WPFMusicPlayer.ViewModel
         public ICommand SavePlaylistCommand { get; set; }
         public ICommand NextPlaylistCommand { get; set; }
         public ICommand PreviousPlaylistCommand { get; set; }
+        
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         
         private bool CanAddSong(object obj) => true;
 
