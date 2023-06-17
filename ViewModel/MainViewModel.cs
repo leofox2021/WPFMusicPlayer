@@ -31,7 +31,7 @@ public partial class MainViewModel : ObservableObject
         
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Songs))]
-    [NotifyPropertyChangedFor(nameof(SongQuantity))]
+    [NotifyPropertyChangedFor(nameof(Playlist))]
     private int _selectedPlaylistIndex;
         
     private static MainViewModel _instance;
@@ -93,10 +93,10 @@ public partial class MainViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-        
+
+    public Playlist Playlist => Playlists[_selectedPlaylistIndex];
     public ObservableCollection<Song> Songs => Playlists[_selectedPlaylistIndex].Songs;
     public ObservableCollection<Playlist> Playlists { get; set; }
-    public int SongQuantity => Playlists[_selectedPlaylistIndex].SongQuantity;
 
     public ICommand AddSongCommand { get; set; }
     public ICommand PlaySongCommand { get; set; }

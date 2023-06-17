@@ -29,11 +29,15 @@ public static class MusicPlayerController
         
     public static void OnPlay()
     {
-        MusicPlayer.Instance.Play(PlaylistController.Instance.Playlists[MainViewModel.Instance.SelectedPlaylistIndex]
-            .Songs[MainViewModel.Instance.SelectedSongIndex]);
-        MusicPlayer.Instance.Timer.Start();
-        MainViewModel.Instance.Artwork = MusicPlayer.Instance.Song.Artwork;
-        MainViewModel.Instance.Volume = MusicPlayer.Instance.Volume;
+        try
+        {
+            MusicPlayer.Instance.Play(PlaylistController.Instance.Playlists[MainViewModel.Instance.SelectedPlaylistIndex]
+                .Songs[MainViewModel.Instance.SelectedSongIndex]);
+            MusicPlayer.Instance.Timer.Start();
+            MainViewModel.Instance.Artwork = MusicPlayer.Instance.Song.Artwork;
+            MainViewModel.Instance.Volume = MusicPlayer.Instance.Volume;    
+        }
+        catch (Exception) {} 
     }
         
     public static void OnPause()

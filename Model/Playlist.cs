@@ -17,7 +17,7 @@ public class Playlist
             ? ConstantStrings.DefaultPlaylist 
             : PathManager.GetFileName(path);
             
-        if (!path.Equals("default"))
+        if (!path.Equals(ConstantStrings.DefaultPlaylistPath))
             LoadSongsFromM3U();
     }
         
