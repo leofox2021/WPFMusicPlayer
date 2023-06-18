@@ -18,7 +18,7 @@ public class MusicPlayer
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
         _player.MediaOpened += MusicPlayerController.UpdateDurationProperties;
-        _player.MediaEnded += Stop;
+        _player.MediaEnded += MusicPlayerController.OnMediaEnded;
         _timer.Tick += MusicPlayerController.UpdatePositionProperties;
     }
 

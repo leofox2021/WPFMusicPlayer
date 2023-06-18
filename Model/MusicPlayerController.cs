@@ -62,4 +62,10 @@ public static class MusicPlayerController
     // Fires on musicplayer open event
     public static void UpdateDurationProperties(object sender, EventArgs e) =>
         MainViewModel.Instance.NaturalDuration = MusicPlayer.Instance.Player.NaturalDuration;
+    
+    public static void OnMediaEnded(object sender, EventArgs e)
+    {
+        if (MainViewModel.Instance.SelectedSongIndex < MainViewModel.Instance.Playlist.Songs.Count - 1) OnNextSong();
+        else MusicPlayer.Instance.Stop();
+    }
 }

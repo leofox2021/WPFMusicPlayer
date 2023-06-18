@@ -96,6 +96,10 @@
                 </Border>
             </StackPanel>
             
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0 ,0">
+                <TextBlock Margin="400, 0, 0 , 0" Width="200" Text="{Binding NameArtist}"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="275, 0, 0 ,0">
                 <Slider 
                     Height="20" 

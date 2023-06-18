@@ -1,6 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -24,6 +25,7 @@ public partial class MainViewModel : ObservableObject
     private TimeSpan _positionTimeSpan;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(NameArtist))]
     private BitmapImage _artwork;
         
     [ObservableProperty]
@@ -71,6 +73,10 @@ public partial class MainViewModel : ObservableObject
         _naturalDuration.HasTimeSpan ? _naturalDuration.TimeSpan.Minutes : 0,
         _naturalDuration.HasTimeSpan ? _naturalDuration.TimeSpan.Seconds : 0
     );
+
+    public string NameArtist => !Songs.Any() || _selectedSongIndex > Songs.Count
+        ? "Time to play a song!"
+        : Songs[_selectedSongIndex].Artist + " - " + Songs[_selectedSongIndex].Name ;
         
     public double SliderPosition
     {
