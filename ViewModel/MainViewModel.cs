@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WPFMusicPlayer.Model;
 using WPFMusicPlayer.Services;
+using WPFMusicPlayer.View;
 using RelayCommand = WPFMusicPlayer.Command.RelayCommand;
 
 namespace WPFMusicPlayer.ViewModel;
@@ -61,7 +62,7 @@ public partial class MainViewModel : ObservableObject
         PreviousPlaylistCommand = new RelayCommand(GoPreviousPlaylist, CanGoPreviousPlaylist);
     }
 
-    public static MainViewModel Instance => _instance ?? (_instance = new MainViewModel());
+    public static MainViewModel Instance => _instance ??= new MainViewModel();
 
     public string Timer =>
         TimeDisplayService.ConvertToProperTimeFormat(_positionTimeSpan.Minutes, _positionTimeSpan.Seconds);
@@ -154,7 +155,7 @@ public partial class MainViewModel : ObservableObject
         
     private bool CanSavePlaylist(object obj) => true;
 
-    private void SavePlaylist(object obj) => PlaylistController.Instance.OnSavePlaylist();
+    private void SavePlaylist(object obj) => new PlaylistNameDialog().Show();
 
     private bool CanCreateNewPlaylist(object obj) => true;
 
